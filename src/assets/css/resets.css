@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Open+Sans:wght@400;700&display=swap");
+
+:root {
+    --bg-gradient: linear-gradient(to right bottom, #fbdb89, #f48982);
+    --orange: #f48982;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    transition: 300ms ease;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Open Sans", sans-serif;
+    background: var(--bg-gradient);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+li {
+    list-style: none;
+}
+
+button {
+    font-family: inherit;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    display: inline-block;
+}
+
+input,
+textarea {
+    font-family: inherit;
+    color: inherit;
+    border: none;
+}
+
+svg {
+    width: 2.5rem;
+    height: 2.5rem;
+    fill: currentColor;
+}
