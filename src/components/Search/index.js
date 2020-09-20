@@ -12,6 +12,10 @@ export default function Search() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (input !== "") {
+            dispatch({
+                type: ActionTypes.SET_LOADING,
+                isLoading: true,
+            });
             fetch(`https://forkify-api.herokuapp.com/api/search?q=${input}`)
                 .then((res) => res.json())
                 .then((data) => {
@@ -20,7 +24,19 @@ export default function Search() {
                         recipes: data.recipes,
                     });
                 })
-                .catch((err) => console.log(err));
+                .catch((err) => {
+                    dispatch({
+                        type: ActionTypes.SEARCH_RECIPE,
+                        recipes: 'None',
+                    });
+                })
+                .finally(() => {
+                    dispatch({
+                        type: ActionTypes.SET_LOADING,
+                        isLoading: false,
+                    });
+                });
+            setInput("");
         }
     };
 
