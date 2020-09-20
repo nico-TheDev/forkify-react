@@ -29,6 +29,10 @@ a {
     color: inherit;
 }
 
+a.active li{
+    background:#eee;
+}
+
 li {
     list-style: none;
 }
@@ -52,4 +56,9 @@ svg {
     width: 2.5rem;
     height: 2.5rem;
     fill: currentColor;
+}
+
+
+img{
+    display:block;
 }
