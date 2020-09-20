@@ -20,3 +20,12 @@ export const NoRecipes = styled.li`
         font-size: 2.5rem;
     }
 `;
+
+
+export const QueryLink = styled.a`
+    color:var(--orange);
+
+    &:hover{
+        text-decoration:underline;
+    }
+`
