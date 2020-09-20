@@ -8,7 +8,8 @@ export const AppProvider = ({ children }) => {
         recipes: null,
         currentRecipe: null,
         savedRecipes: null,
-        recipeList:null
+        recipeList: null,
+        isLoading: false,
     });
 
     return (
