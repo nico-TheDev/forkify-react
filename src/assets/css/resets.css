@@ -3,6 +3,9 @@
 :root {
     --bg-gradient: linear-gradient(to right bottom, #fbdb89, #f48982);
     --orange: #f48982;
+    --gray-1:#eee;
+    --gray-2:rgba(245, 245, 245, 0.589);
+    --gray-3:rgb(250, 244, 244);
 }
 
 *,
