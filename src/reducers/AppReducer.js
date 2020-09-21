@@ -12,7 +12,7 @@ export default function AppReducer(state, action) {
             return {
                 ...state,
                 recipes: action.recipes,
-                recipeList: action.recipes?.slice(0, 10),
+                recipeList: action.recipes ? action.recipes.slice(0, 10) : [],
             };
 
         case ActionTypes.GET_RECIPE_DETAIL:
