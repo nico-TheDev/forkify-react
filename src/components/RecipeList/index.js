@@ -11,7 +11,7 @@ export default function RecipeList() {
     const { recipes, recipeList, isLoading } = state;
 
     if (isLoading && !recipes) {
-        return <Loader/>;
+        return <Loader />;
     }
 
     if (!isLoading && recipes === undefined) {
@@ -31,7 +31,7 @@ export default function RecipeList() {
         );
     }
 
-    if (!isLoading && recipes) {
+    if (!isLoading && Array.isArray(recipes)) {
         return (
             <div>
                 <List>

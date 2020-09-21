@@ -9,11 +9,15 @@ import {
     RecipeName,
     Mini,
     Item,
-    Like
+    Like,
+    Button,
+    HowTo,
+    Title,
 } from "./styles";
 import ActionTypes from "ActionTypes";
 import decodeText from "util/decodeText";
 import Loader from "components/shared/Loader";
+import Ingredients from "./Ingredients";
 
 export default function Details({ match, location }) {
     const { id } = match.params;
@@ -37,19 +41,16 @@ export default function Details({ match, location }) {
                     setIsLoading(false);
                 });
         }
-    }, [location.pathname, id,dispatch]);
+    }, [location.pathname, id, dispatch]);
 
     if (isLoading && !currentRecipe) {
-        return <Loader/>;
+        return <Loader />;
     }
 
     return (
         <Recipe>
             <RecipeHead>
-                <RecipeImg
-                    src={currentRecipe?.image_url}
-                    alt="recipe photo"
-                />
+                <RecipeImg src={currentRecipe?.image_url} alt="recipe photo" />
                 <RecipeName>
                     <span>{decodeText(currentRecipe?.title)}</span>
                 </RecipeName>
@@ -66,7 +67,7 @@ export default function Details({ match, location }) {
                     <svg>
                         <use href={getIcon("person")} />
                     </svg>
-                    4 Servings
+                    1 Servings
                 </Item>
                 <Like>
                     <svg>
@@ -74,6 +75,27 @@ export default function Details({ match, location }) {
                     </svg>
                 </Like>
             </Mini>
+            <Ingredients />
+            <HowTo>
+            <Button>
+                <svg>
+                    <use href={getIcon("cart")} />
+                </svg>
+                Add To Shopping Cart
+            </Button>
+                <Title>How To Cook</Title>
+                <Button
+                    as="a"
+                    href={currentRecipe?.source_url}
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <svg>
+                        <use href={getIcon("bookmark")} />
+                    </svg>
+                    Directions
+                </Button>
+            </HowTo>
         </Recipe>
     );
 }

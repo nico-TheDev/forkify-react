@@ -56,7 +56,7 @@ export const Mini = styled.ul`
     display: flex;
     padding: 3rem 1rem;
     align-items: center;
-    background: #eee;
+    background: var(--gray-1);
 `;
 
 export const Item = styled.li`
@@ -92,3 +92,40 @@ export const Like = styled.button`
         fill: white;
     }
 `;
+
+
+export const Button = styled(Like)`
+    background:var(--bg-gradient);
+    padding:0.5em 2em;
+    font-size:1.3rem;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    color:white;
+    width:auto;
+    height:auto;
+    border-radius:3rem;
+    margin:auto;
+    display:flex;
+    align-items:center;
+
+    svg{
+        margin-right:10px;
+    }
+`
+
+export const HowTo = styled.div`
+    display:grid;
+    justify-items:center;
+    text-align:center;
+    gap:1rem;
+    padding:1.5rem 0;
+    background: var(--gray-1);
+`
+
+export const Title= styled.h3`
+    color:var(--orange);
+    font-style:italic;
+    font-size:1.5rem;
+    text-transform:uppercase;
+    font-weight:300;
+`
