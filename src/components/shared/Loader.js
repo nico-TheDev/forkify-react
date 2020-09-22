@@ -14,7 +14,7 @@ const spin = keyframes`
 
 const Spinner = styled.div`
     width: 100%;
-    height: 100vh;
+    height: 88vh;
     display: grid;
     place-items: center;
     svg {

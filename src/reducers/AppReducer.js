@@ -16,6 +16,7 @@ export default function AppReducer(state, action) {
             };
 
         case ActionTypes.GET_RECIPE_DETAIL:
+          
             return {
                 ...state,
                 currentRecipe: action.recipe,
@@ -40,6 +41,26 @@ export default function AppReducer(state, action) {
                 ...state,
                 recipeList: state.recipes?.slice(start2, end2),
             };
+
+        case ActionTypes.BOOKMARK_RECIPE:
+            const savedID = state.savedRecipes.map((item) => item.recipe_id);
+
+            if (savedID.includes(action.recipe.recipe_id)) {
+                const indexTarget = state.savedRecipes.findIndex(
+                    (item) => item.recipe_id === action.recipe.recipe_id
+                );
+                const newSavedRecipes = [...state.savedRecipes];
+                newSavedRecipes.splice(indexTarget, 1);
+                return {
+                    ...state,
+                    savedRecipes: newSavedRecipes,
+                };
+            } else {
+                return {
+                    ...state,
+                    savedRecipes: [...state.savedRecipes, action.recipe],
+                };
+            }
         default:
             return state;
     }

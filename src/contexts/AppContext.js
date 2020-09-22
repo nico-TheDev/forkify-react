@@ -7,7 +7,7 @@ export const AppProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AppReducer, {
         recipes: null,
         currentRecipe: null,
-        savedRecipes: null,
+        savedRecipes: [],
         recipeList: null,
         isLoading: false,
     });
