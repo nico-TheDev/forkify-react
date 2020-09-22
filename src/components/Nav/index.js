@@ -1,3 +1,4 @@
+import Bookmarks from "components/Bookmarks";
 import Search from "components/Search";
 import React from "react";
 import getIcon from "util/getIcon";
@@ -17,7 +18,7 @@ export default function Nav() {
 
             <Search />
 
-            <div/>
+            <Bookmarks />
         </NavWrapper>
     );
 }

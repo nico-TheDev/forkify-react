@@ -13,17 +13,20 @@ import {
     Button,
     HowTo,
     Title,
+    ServingBtn,
 } from "./styles";
 import ActionTypes from "ActionTypes";
 import decodeText from "util/decodeText";
 import Loader from "components/shared/Loader";
 import Ingredients from "./Ingredients";
 
-export default function Details({ match, location }) {
+export default function Details({ match, location, history }) {
     const { id } = match.params;
+    const [isLoading, setIsLoading] = useState(false);
+    const [isBookmarked, setIsBookmarked] = useState(false);
+    const [numOfServings, setNumOfServings] = useState(1);
     const { state, dispatch } = useApp();
     const { currentRecipe } = state;
-    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (id) {
@@ -36,14 +39,27 @@ export default function Details({ match, location }) {
                         recipe: data.recipe,
                     });
                 })
-                .catch((err) => console.error(err))
+                .catch(() => history.push("/"))
                 .finally(() => {
                     setIsLoading(false);
                 });
         }
     }, [location.pathname, id, dispatch]);
 
-    if (isLoading && !currentRecipe) {
+    useEffect(() => {
+        const savedID = state.savedRecipes.map((item) => item.recipe_id);
+        if (savedID.includes(currentRecipe?.recipe_id)) {
+            setIsBookmarked(true);
+        } else {
+            setIsBookmarked(false);
+        }
+    }, [state.currentRecipe, state.savedRecipes, id]);
+
+    const handleLike = () => {
+        dispatch({ type: ActionTypes.BOOKMARK_RECIPE, recipe: currentRecipe });
+    };
+
+    if (isLoading || !currentRecipe) {
         return <Loader />;
     }
 
@@ -67,22 +83,36 @@ export default function Details({ match, location }) {
                     <svg>
                         <use href={getIcon("person")} />
                     </svg>
-                    1 Servings
+                    {numOfServings} Servings
+                    <ServingBtn>
+                        <svg>
+                            <use href={getIcon("minus")} />
+                        </svg>
+                    </ServingBtn>
+                    <ServingBtn>
+                        <svg>
+                            <use href={getIcon("plus")} />
+                        </svg>
+                    </ServingBtn>
                 </Item>
-                <Like>
+                <Like onClick={handleLike}>
                     <svg>
-                        <use href={getIcon("heart-outlined")} />
+                        <use
+                            href={getIcon(
+                                isBookmarked ? "heart" : "heart-outlined"
+                            )}
+                        />
                     </svg>
                 </Like>
             </Mini>
             <Ingredients />
             <HowTo>
-            <Button>
-                <svg>
-                    <use href={getIcon("cart")} />
-                </svg>
-                Add To Shopping Cart
-            </Button>
+                <Button>
+                    <svg>
+                        <use href={getIcon("cart")} />
+                    </svg>
+                    Add To Shopping Cart
+                </Button>
                 <Title>How To Cook</Title>
                 <Button
                     as="a"

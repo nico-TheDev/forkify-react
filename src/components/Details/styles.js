@@ -93,6 +93,16 @@ export const Like = styled.button`
     }
 `;
 
+export const ServingBtn = styled(Like)`
+    width:1.5rem;
+    height:1.5rem;
+    margin-left:10px;
+    svg {
+        width:  25px;
+        height: 25px;
+    }
+`
+
 
 export const Button = styled(Like)`
     background:var(--bg-gradient);
