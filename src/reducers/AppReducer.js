@@ -1,6 +1,10 @@
 import ActionTypes from "ActionTypes";
 import formatText from "util/formatText";
 
+const saveToStorage = (name, item) => {
+    localStorage.setItem(name, JSON.stringify(item));
+};
+
 export default function AppReducer(state, action) {
     switch (action.type) {
         case ActionTypes.SET_LOADING:
@@ -57,6 +61,25 @@ export default function AppReducer(state, action) {
                 recipeList: state.recipes?.slice(start2, end2),
             };
 
+        case ActionTypes.ADD_TO_CART:
+            saveToStorage("cart", [...state.shoppingCart, ...action.cart]);
+            return {
+                ...state,
+                shoppingCart: [...state.shoppingCart, ...action.cart],
+            };
+
+        case ActionTypes.REMOVE_FROM_CART:
+            const updatedCart = [...state.shoppingCart];
+            const cartIndex = updatedCart.findIndex(
+                (item) => item.id === action.id
+            );
+            updatedCart.splice(cartIndex, 1);
+            saveToStorage("cart", updatedCart);
+            return {
+                ...state,
+                shoppingCart: updatedCart,
+            };
+
         case ActionTypes.BOOKMARK_RECIPE:
             const savedID = state.savedRecipes.map((item) => item.recipe_id);
 
@@ -66,11 +89,16 @@ export default function AppReducer(state, action) {
                 );
                 const newSavedRecipes = [...state.savedRecipes];
                 newSavedRecipes.splice(indexTarget, 1);
+                saveToStorage("bookmarks", newSavedRecipes);
                 return {
                     ...state,
                     savedRecipes: newSavedRecipes,
                 };
             } else {
+                saveToStorage("bookmarks", [
+                    ...state.savedRecipes,
+                    action.recipe,
+                ]);
                 return {
                     ...state,
                     savedRecipes: [...state.savedRecipes, action.recipe],

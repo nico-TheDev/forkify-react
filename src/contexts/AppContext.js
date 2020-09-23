@@ -3,14 +3,22 @@ import AppReducer from "reducers/AppReducer";
 
 const AppContext = createContext();
 
+const getItem = (name) => {
+    if (localStorage.getItem(name)) {
+        return JSON.parse(localStorage.getItem(name));
+    } else {
+        return [];
+    }
+};
+
 export const AppProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AppReducer, {
         recipes: null,
         currentRecipe: null,
-        savedRecipes: [],
+        savedRecipes: getItem('bookmarks'),
         recipeList: null,
         isLoading: false,
-        shoppingCart:[]
+        shoppingCart: [],
     });
 
     return (
