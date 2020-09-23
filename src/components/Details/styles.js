@@ -103,6 +103,11 @@ export const ServingBtn = styled(Like)`
     }
 `
 
+export const MinusBtn = styled(ServingBtn)`
+    pointer-events:${({servings}) => servings === 1 ? 'none' : 'all'};
+    opacity:${({servings}) => servings === 1 ? '0' : '1'};
+`
+
 
 export const Button = styled(Like)`
     background:var(--bg-gradient);

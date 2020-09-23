@@ -8,9 +8,9 @@ import Loader from "components/shared/Loader";
 
 export default function RecipeList() {
     const { state } = useApp();
-    const { recipes, recipeList, isLoading } = state;
+    const { recipes, recipeList, isLoading,currentRecipe } = state;
 
-    if (isLoading && !recipes) {
+    if ((isLoading && !recipes && !currentRecipe) || (isLoading && currentRecipe)) {
         return <Loader />;
     }
 

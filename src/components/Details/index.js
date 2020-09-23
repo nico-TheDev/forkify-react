@@ -14,21 +14,33 @@ import {
     HowTo,
     Title,
     ServingBtn,
+    MinusBtn,
 } from "./styles";
 import ActionTypes from "ActionTypes";
 import decodeText from "util/decodeText";
 import Loader from "components/shared/Loader";
 import Ingredients from "./Ingredients";
 
+const generateTime = (count) => {
+    if (count <= 5) return 30;
+    else if (count > 5 && count <= 12) return 45;
+    else if (count > 12 && count <= 16) return 60;
+    else if (count > 16 && count <= 22) return 90;
+    else {
+        return 180;
+    }
+};
+
 export default function Details({ match, location, history }) {
     const { id } = match.params;
     const [isLoading, setIsLoading] = useState(false);
     const [isBookmarked, setIsBookmarked] = useState(false);
-    const [numOfServings, setNumOfServings] = useState(1);
+    let [numOfServings, setNumOfServings] = useState(1);
     const { state, dispatch } = useApp();
     const { currentRecipe } = state;
 
     useEffect(() => {
+        setNumOfServings(1);
         if (id) {
             setIsLoading(true);
             fetch(`https://forkify-api.herokuapp.com/api/get?rId=${id}`)
@@ -59,6 +71,21 @@ export default function Details({ match, location, history }) {
         dispatch({ type: ActionTypes.BOOKMARK_RECIPE, recipe: currentRecipe });
     };
 
+    const addServings = () => {
+        setNumOfServings((numOfServings += 1));
+        dispatch({
+            type: ActionTypes.MULTIPLY_INGREDIENTS,
+            servings: numOfServings,
+        });
+    };
+    const subtractServings = () => {
+        setNumOfServings((numOfServings -= 1));
+        dispatch({
+            type: ActionTypes.MULTIPLY_INGREDIENTS,
+            servings: numOfServings,
+        });
+    };
+
     if (isLoading || !currentRecipe) {
         return <Loader />;
     }
@@ -77,19 +104,22 @@ export default function Details({ match, location, history }) {
                     <svg>
                         <use href={getIcon("timer")} />
                     </svg>
-                    60 Minutes
+                    {generateTime(currentRecipe.ingredients.length)} Minutes
                 </Item>
                 <Item>
                     <svg>
                         <use href={getIcon("person")} />
                     </svg>
-                    {numOfServings} Servings
-                    <ServingBtn>
+                    {numOfServings} Serving{numOfServings === 1 ? "" : "s"}
+                    <MinusBtn
+                        servings={numOfServings}
+                        onClick={subtractServings}
+                    >
                         <svg>
                             <use href={getIcon("minus")} />
                         </svg>
-                    </ServingBtn>
-                    <ServingBtn>
+                    </MinusBtn>
+                    <ServingBtn onClick={addServings}>
                         <svg>
                             <use href={getIcon("plus")} />
                         </svg>
