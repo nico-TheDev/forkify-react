@@ -1,4 +1,5 @@
 import ActionTypes from "ActionTypes";
+import formatText from "util/formatText";
 
 export default function AppReducer(state, action) {
     switch (action.type) {
@@ -16,10 +17,24 @@ export default function AppReducer(state, action) {
             };
 
         case ActionTypes.GET_RECIPE_DETAIL:
-          
+            action.recipe.ingredients = action.recipe.ingredients.map((item) =>
+                formatText(item)
+            );
+
             return {
                 ...state,
                 currentRecipe: action.recipe,
+            };
+
+        case ActionTypes.MULTIPLY_INGREDIENTS:
+            const newRecipe = { ...state.currentRecipe };
+            newRecipe.ingredients = newRecipe.ingredients.map((item) => ({
+                ...item,
+                total: item.value * action.servings,
+            }));
+            return {
+                ...state,
+                currentRecipe: newRecipe,
             };
 
         case ActionTypes.NEXT_PAGE:

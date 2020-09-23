@@ -10,6 +10,7 @@ export const AppProvider = ({ children }) => {
         savedRecipes: [],
         recipeList: null,
         isLoading: false,
+        shoppingCart:[]
     });
 
     return (
