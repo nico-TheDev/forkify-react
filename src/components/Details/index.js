@@ -15,6 +15,7 @@ import {
     Title,
     ServingBtn,
     MinusBtn,
+    Note,
 } from "./styles";
 import ActionTypes from "ActionTypes";
 import decodeText from "util/decodeText";
@@ -86,6 +87,12 @@ export default function Details({ match, location, history }) {
         });
     };
 
+    const addToCart = () =>
+        dispatch({
+            type: ActionTypes.ADD_TO_CART,
+            cart: currentRecipe.ingredients,
+        });
+
     if (isLoading || !currentRecipe) {
         return <Loader />;
     }
@@ -137,13 +144,18 @@ export default function Details({ match, location, history }) {
             </Mini>
             <Ingredients />
             <HowTo>
-                <Button>
+                <Button onClick={addToCart}>
                     <svg>
                         <use href={getIcon("cart")} />
                     </svg>
                     Add To Shopping Cart
                 </Button>
                 <Title>How To Cook</Title>
+                <Note>
+                    The recipe was carefully designed and created by{" "}
+                    <span>{currentRecipe?.publisher}</span>. Please check out
+                    their sites.
+                </Note>
                 <Button
                     as="a"
                     href={currentRecipe?.source_url}

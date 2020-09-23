@@ -63,7 +63,7 @@ export const Item = styled.li`
     display: flex;
     align-items: center;
     text-transform: uppercase;
-    margin-right:1.5rem;
+    margin-right: 1.5rem;
 
     svg {
         margin-right: 10px;
@@ -80,7 +80,7 @@ export const Like = styled.button`
     border-radius: 50%;
     display: grid;
     place-items: center;
-    margin-left:auto;
+    margin-left: auto;
 
     &:hover {
         transform: scale(1.1);
@@ -94,53 +94,63 @@ export const Like = styled.button`
 `;
 
 export const ServingBtn = styled(Like)`
-    width:1.5rem;
-    height:1.5rem;
-    margin-left:10px;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-left: 10px;
     svg {
-        width:  25px;
+        width: 25px;
         height: 25px;
     }
-`
+`;
 
 export const MinusBtn = styled(ServingBtn)`
-    pointer-events:${({servings}) => servings === 1 ? 'none' : 'all'};
-    opacity:${({servings}) => servings === 1 ? '0' : '1'};
-`
-
+    pointer-events: ${({ servings }) => (servings === 1 ? "none" : "all")};
+    opacity: ${({ servings }) => (servings === 1 ? "0" : "1")};
+`;
 
 export const Button = styled(Like)`
-    background:var(--bg-gradient);
-    padding:0.5em 2em;
-    font-size:1.3rem;
-    text-transform:uppercase;
-    letter-spacing:2px;
-    color:white;
-    width:auto;
-    height:auto;
-    border-radius:3rem;
-    margin:auto;
-    display:flex;
-    align-items:center;
+    background: var(--bg-gradient);
+    padding: 0.5em 2em;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: white;
+    width: auto;
+    height: auto;
+    border-radius: 3rem;
+    margin: auto;
+    display: flex;
+    align-items: center;
 
-    svg{
-        margin-right:10px;
+    svg {
+        margin-right: 10px;
     }
-`
+`;
 
 export const HowTo = styled.div`
-    display:grid;
-    justify-items:center;
-    text-align:center;
-    gap:1rem;
-    padding:1.5rem 0;
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.5rem 0;
     background: var(--gray-1);
-`
+`;
 
-export const Title= styled.h3`
-    color:var(--orange);
-    font-style:italic;
-    font-size:1.5rem;
-    text-transform:uppercase;
-    font-weight:300;
-`
+export const Note = styled.p`
+    width: 80%;
+    font-size: 0.9rem;
+    margin: auto;
+    margin-bottom: 1rem;
+
+    span{
+        font-weight:bold;
+    }
+`;
+
+export const Title = styled.h3`
+    color: var(--orange);
+    font-style: italic;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-weight: 300;
+`;

@@ -14,9 +14,9 @@ export default function Ingredients() {
                     <svg>
                         <use href={getIcon("check")} />
                     </svg>
-                    {`${formatCount(item.total) ||formatCount(item.value)} ${
-                        item.unit || ""
-                    } ${item.ingredients}`}
+                    {`${formatCount(item.total)} ${item.unit || ""} ${
+                        item.ingredients
+                    }`}
                 </Item>
             ))}
         </List>
