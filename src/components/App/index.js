@@ -6,6 +6,7 @@ import { MainApp, RecipeBoard } from "./style";
 import Nav from "components/Nav";
 import RecipeList from "components/RecipeList";
 import Details from "components/Details";
+import Cart from "components/Cart";
 
 export default function App() {
     return (
@@ -13,7 +14,8 @@ export default function App() {
             <Nav />
             <RecipeBoard>
                 <RecipeList />
-                <Route path='/recipe/:id' component={Details}/>
+                <Route path="/recipe/:id" component={Details} />
+                <Cart />
             </RecipeBoard>
         </MainApp>
     );

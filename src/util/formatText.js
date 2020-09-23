@@ -56,7 +56,7 @@ export default function formatText(text) {
                 value: splitText[0],
                 unit: splitText[1],
                 ingredients: splitText.slice(2).join(" "),
-                total: Number(splitText[0]),
+                total: splitText[0],
             };
         }
     } else if (/[0-9]/.test(splitText.join(" "))) {
@@ -64,14 +64,14 @@ export default function formatText(text) {
             value: splitText[0],
             unit: splitText[1],
             ingredients: splitText.slice(2).join(" "),
-            total: Number(splitText[0]),
+            total: splitText[0],
         };
     } else {
         return {
             value: 1,
             unit: "",
             ingredients: text.toLowerCase(),
-            total:""
+            total:1
         };
     }
 }
